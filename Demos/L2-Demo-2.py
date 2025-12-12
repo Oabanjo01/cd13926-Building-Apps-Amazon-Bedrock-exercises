@@ -22,8 +22,11 @@ def invoke_claude_model(prompt_text):
     # Add user's prompt to conversation history
     add_message("user", prompt_text)
 
+    # Create a session with the udacity profile
+    session = boto3.Session(profile_name='udacity')
+    
     # Create a Bedrock Runtime client
-    client = boto3.client('bedrock-runtime', region_name='us-east-1')
+    client = session.client('bedrock-runtime', region_name='us-east-1')
     
     # Set the model ID for Claude 3 Sonnet
     model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
